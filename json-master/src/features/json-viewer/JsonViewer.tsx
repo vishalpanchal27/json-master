@@ -1,8 +1,17 @@
 import JsonInput from "./components/JsonInput";
 import JsonOutput from "./components/JsonOutput";
 import Toolbar from "./components/Toolbar";
+import useJsonViewer from "./hooks/useJsonViewer";
 
 const JsonViewer = () => {
+    const {
+        input,
+        output,
+        error,
+        setInput,
+        handleFormat,
+    } = useJsonViewer();
+
     return (
         <section className="mx-auto max-w-7xl px-6 py-12">
 
@@ -11,11 +20,21 @@ const JsonViewer = () => {
             </h2>
 
             <div className="grid gap-6 lg:grid-cols-2">
-                <JsonInput />
-                <JsonOutput />
+
+                <JsonInput
+                    value={input}
+                    onChange={setInput}
+                />
+
+                <JsonOutput
+                    output={output}
+                    error={error}
+                />
+
             </div>
 
-            <Toolbar />
+            <Toolbar onFormat={handleFormat} />
+
         </section>
     );
 };

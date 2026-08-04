@@ -1,10 +1,13 @@
-import Button from "../../../components/Button";
+import Button from "@/components/Button";
 
-const Toolbar = () => {
+type ToolbarProps = {
+    onFormat: () => void;
+};
+
+const Toolbar = ({ onFormat }: ToolbarProps) => {
     return (
         <div className="mt-6 flex flex-wrap gap-4">
-
-            <Button>
+            <Button onClick={onFormat}>
                 Format
             </Button>
 
@@ -19,7 +22,6 @@ const Toolbar = () => {
             <Button variant="danger">
                 Clear
             </Button>
-
         </div>
     );
 };
