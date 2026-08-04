@@ -37,12 +37,38 @@ const useJsonViewer = () => {
         }
     };
 
+    const handleClear = () => {
+        setInput("");
+        setOutput("");
+        setError("");
+    };
+
+    const handleCopy = async () => {
+        if (!output) return;
+
+        await navigator.clipboard.writeText(output);
+    };
+
+    const handleValidate = () => {
+        try {
+            JSON.parse(input);
+
+            setError("");
+            alert("Valid JSON ✅");
+        } catch {
+            setError("Invalid JSON");
+        }
+    };
+
     return {
         input,
         output,
         error,
         setInput,
         handleFormat,
+        handleClear,
+        handleCopy,
+        handleValidate,
     };
 };
 

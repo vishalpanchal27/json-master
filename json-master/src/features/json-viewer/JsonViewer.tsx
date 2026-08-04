@@ -10,6 +10,9 @@ const JsonViewer = () => {
         error,
         setInput,
         handleFormat,
+        handleValidate,
+        handleCopy,
+        handleClear,
     } = useJsonViewer();
 
     return (
@@ -33,7 +36,12 @@ const JsonViewer = () => {
 
             </div>
 
-            <Toolbar onFormat={handleFormat} />
+            <Toolbar
+                onFormat={handleFormat}
+                onValidate={handleValidate}
+                onCopy={handleCopy}
+                onClear={handleClear}
+            />
 
         </section>
     );
