@@ -1,7 +1,9 @@
 import JsonInput from "./components/JsonInput";
 import JsonOutput from "./components/JsonOutput";
-import Toolbar from "./components/Toolbar";
+// import Toolbar from "./components/Toolbar";
 import useJsonViewer from "./hooks/useJsonViewer";
+import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
 
 const JsonViewer = () => {
     const {
@@ -24,24 +26,63 @@ const JsonViewer = () => {
 
             <div className="grid gap-6 lg:grid-cols-2">
 
-                <JsonInput
-                    value={input}
-                    onChange={setInput}
-                />
+                <Card
+                    title="JSON Input"
+                    subtitle="Paste your JSON here"
+                    headerAction={
+                        <div className="flex gap-2">
+                            <Button onClick={handleFormat}>
+                                Format
+                            </Button>
 
-                <JsonOutput
-                    output={output}
-                    error={error}
-                />
+                            <Button
+                                variant="secondary"
+                                onClick={handleValidate}
+                            >
+                                Validate
+                            </Button>
+
+                            <Button
+                                variant="danger"
+                                onClick={handleClear}
+                            >
+                                Clear
+                            </Button>
+                        </div>
+                    }
+                >
+                    <JsonInput
+                        value={input}
+                        onChange={setInput}
+                    />
+                </Card>
+
+                <Card
+                    title="Formatted Output"
+                    subtitle="Pretty printed JSON"
+                    headerAction={
+                        <Button
+                            variant="secondary"
+                            onClick={handleCopy}
+                        >
+                            Copy
+                        </Button>
+                    }
+                >
+                    <JsonOutput
+                        output={output}
+                        error={error}
+                    />
+                </Card>
 
             </div>
 
-            <Toolbar
+            {/* <Toolbar
                 onFormat={handleFormat}
                 onValidate={handleValidate}
                 onCopy={handleCopy}
                 onClear={handleClear}
-            />
+            /> */}
 
         </section>
     );

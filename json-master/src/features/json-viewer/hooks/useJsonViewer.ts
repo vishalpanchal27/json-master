@@ -1,24 +1,6 @@
-// import { useState } from "react";
-
-// const useJsonViewer = () => {
-//     const [input, setInput] = useState("");
-//     const [output, setOutput] = useState("");
-//     const [error, setError] = useState("");
-
-//     return {
-//         input,
-//         output,
-//         error,
-//         setInput,
-//         setOutput,
-//         setError,
-//     };
-// };
-
-// export default useJsonViewer;
-
 import { useState } from "react";
 import { formatJson } from "../utils/formatJson";
+import { toast } from "sonner";
 
 const useJsonViewer = () => {
     const [input, setInput] = useState("");
@@ -31,9 +13,11 @@ const useJsonViewer = () => {
 
             setOutput(formatted);
             setError("");
+            toast.success("JSON formatted successfully");
         } catch {
             setOutput("");
             setError("Invalid JSON");
+            toast.error("Invalid JSON");
         }
     };
 
@@ -41,11 +25,13 @@ const useJsonViewer = () => {
         setInput("");
         setOutput("");
         setError("");
+        toast.info("Editor cleared");
     };
 
     const handleCopy = async () => {
         if (!output) return;
 
+        toast.success("Copied to clipboard");
         await navigator.clipboard.writeText(output);
     };
 
@@ -54,7 +40,7 @@ const useJsonViewer = () => {
             JSON.parse(input);
 
             setError("");
-            alert("Valid JSON ✅");
+            toast.success("Valid JSON");
         } catch {
             setError("Invalid JSON");
         }
